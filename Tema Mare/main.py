@@ -8,7 +8,7 @@ if __name__ == '__main__':
     while True:
 
         if sign == 0:
-            print("Sign is as:")
+            print("Sign in as:")
             who = ""
 
             # not able to sign in as long as name is admin vip_user or name from DB
@@ -57,11 +57,11 @@ if __name__ == '__main__':
             if user == 2:
                 print("Vip_user Partial Rights:")
                 print(" list_name, list_cat")
-                print(" add_task, remove_task")
+                print(" add_task, remove_task, list_task")
 
             if user == 3:
                 print(who, "Limited Rights:")
-                print(" read_task, sort_task, done_task")
+                print(" list_task, sort_task, done_task")
 
             print("Additional 'exit' to sign out")
             print("Additional 'end' to end session")
@@ -129,5 +129,34 @@ if __name__ == '__main__':
                 else:
                     print("No rights")
 
-            # if command == "list_task":
-                # TBD
+            if command == "add_task":
+                if user == 2:
+                    name = input()
+                    add_task(name)
+                else:
+                    print("No admin rights")
+
+            if command == "remove_task":
+                if user == 2:
+                    name = input()
+                    remove_task(name)
+                else:
+                    print("No admin rights")
+
+            if command == "list_task":
+                if user == 2 or user == 3:
+                    list_task()
+                else:
+                    print("No rights")
+
+            if command == "ascsort_task":
+                if user == 1 or user == 2 or user == 3:
+                    ascsort_task()
+                else:
+                    print("No rights")
+
+            if command == "dessort_task":
+                if user == 1 or user == 2 or user == 3:
+                    dessort_task()
+                else:
+                    print("No rights")

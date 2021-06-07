@@ -121,3 +121,75 @@ def list_category():
         f = open("CategoryDB.txt", "r")
         for x in f:
             print(x)
+
+
+def add_task(task):
+
+    find = 0
+
+    # search duplicates if file exist
+    if path.exists("TasksDB.txt"):
+        f = open("TasksDB.txt", "r")
+        lines = f.readlines()
+        for line in lines:
+            if line.strip("\n") == task:
+                find = 1
+                break
+        f.close()
+
+    # if no duplicate add name
+    if find == 0:
+        f = open("TasksDB.txt", "a")
+        text = "%s\n" % task
+        f.write(text)
+        print(task, "added to TasksDB")
+        # tasklist += list(task)
+        f.close()
+    else:
+        print("not added, duplicate task")
+
+
+def remove_task(task):
+
+    # if file exist search for name, if find remove
+    if not path.exists("TasksDB.txt"):
+        print("Missing file")
+    else:
+        f = open("TasksDB.txt", "r")
+        lines = f.readlines()
+        f.close()
+
+        find = 0
+
+        new_f = open("TasksDB.txt", "w")
+        for line in lines:
+            if line.strip("\n") == task:
+                find = 1
+            if line.strip("\n") != task:
+                new_f.write(line)
+        new_f.close()
+
+        if find == 0:
+            print("task not found in DB")
+        else:
+            print(task, "removed from TasksDB")
+
+
+def list_task():
+
+    print("TasksDB:")
+    if not path.exists("TasksDB.txt"):
+        print("Missing file")
+    else:
+        f = open("TasksDB.txt", "r")
+        for x in f:
+            print(x)
+
+
+# def ascsort_task():
+#     tasklist.sort()
+#     print(tasklist)
+
+# def dessort_task():
+#     tasklist.sort(reverse=True)
+#     print(tasklist)
